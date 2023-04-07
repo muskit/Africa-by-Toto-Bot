@@ -35,6 +35,7 @@ LYRICS = [
 ]
 
 async def main():
+    # read .env into dict
     env = dotenv_values()
     client = tweepy.Client(
         consumer_key=env["CONSUMER_KEY"],

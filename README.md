@@ -2,7 +2,7 @@
 This is a Twitter bot that tweets each line from the song *Africa* by Toto at an interval.
 
 ## Running
-Make sure a `BEARER_TOKEN` is set in a `.env` file in this folder. Then:
+Make sure a `.env` file in this folder with appropriate tokens filled (see `main.py`; it's not hard to figure out). Then:
 ```
 pip install -r requirements.txt
 python main.py
