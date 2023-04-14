@@ -1,3 +1,4 @@
+import sys
 import asyncio
 from datetime import datetime
 
@@ -34,6 +35,8 @@ LYRICS = [
     "Gonna take some time to do the things we never had"
 ]
 
+DELAY_IN_HOURS = 3.05
+
 async def main():
     # read .env into dict
     env = dotenv_values()
@@ -48,14 +51,16 @@ async def main():
     me = client.get_me()
     print(f'Assuming the identity of @{me.data.username} ({me.data.id})')
 
-    line = 0
+    # get line number from argument
+    line = int(sys.argv[1]) % len(LYRICS) if len(sys.argv) > 1 else 0
+
     # the main loop
     while True:
         print(f'Posting line #{line}: {LYRICS[line]}')
         client.create_tweet(text=LYRICS[line])
         line = (line+1) % len(LYRICS)
-        print(f'Delaying for an hour... (started at {datetime.now().strftime("%I:%M:%S%p")})')
-        await asyncio.sleep(3600)
+        print(f'Delaying for {DELAY_IN_HOURS} hours (started at {datetime.now().strftime("%I:%M:%S%p")})')
+        await asyncio.sleep(3600*DELAY_IN_HOURS)
 
 
 if __name__ == '__main__':
